@@ -1,0 +1,99 @@
+# -------------------------------------------------------------------------- #
+#
+# Copyright (C) 1991-2010 Altera Corporation
+# Your use of Altera Corporation's design tools, logic functions 
+# and other software and tools, and its AMPP partner logic 
+# functions, and any output files from any of the foregoing 
+# (including device programming or simulation files), and any 
+# associated documentation or information are expressly subject 
+# to the terms and conditions of the Altera Program License 
+# Subscription Agreement, Altera MegaCore Function License 
+# Agreement, or other applicable license agreement, including, 
+# without limitation, that your use is for the sole purpose of 
+# programming logic devices manufactured by Altera and sold by 
+# Altera or its authorized distributors.  Please refer to the 
+# applicable agreement for further details.
+#
+# -------------------------------------------------------------------------- #
+#
+# Quartus II
+# Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
+# Date created = 19:49:54  January 11, 2020
+#
+# -------------------------------------------------------------------------- #
+#
+# Notes:
+#
+# 1) The default values for assignments are stored in the file:
+#		LedMatrixDisplayModify1Bit_assignment_defaults.qdf
+#    If this file doesn't exist, see file:
+#		assignment_defaults.qdf
+#
+# 2) Altera recommends that you do not modify this file. This
+#    file is updated automatically by the Quartus II software
+#    and any changes you make may be lost or overwritten.
+#
+# -------------------------------------------------------------------------- #
+
+
+set_global_assignment -name FAMILY "MAX II"
+set_global_assignment -name DEVICE EPM1270T144C5
+set_global_assignment -name TOP_LEVEL_ENTITY LedMatrixDisplayModify1Bit
+set_global_assignment -name ORIGINAL_QUARTUS_VERSION "9.1 SP2"
+set_global_assignment -name PROJECT_CREATION_TIME_DATE "19:49:54  JANUARY 11, 2020"
+set_global_assignment -name LAST_QUARTUS_VERSION "9.1 SP2"
+set_global_assignment -name USE_GENERATED_PHYSICAL_CONSTRAINTS OFF -section_id eda_blast_fpga
+set_global_assignment -name SEARCH_PATH "c:\\users\\user\\desktop\\project\\main_clock_bdf/"
+set_global_assignment -name DEVICE_FILTER_PACKAGE TQFP
+set_global_assignment -name DEVICE_FILTER_PIN_COUNT 144
+set_global_assignment -name DEVICE_FILTER_SPEED_GRADE 5
+set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
+set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
+set_global_assignment -name POWER_EXT_SUPPLY_VOLTAGE_TO_REGULATOR 3.3V
+set_global_assignment -name VHDL_FILE LedMatrixDisplayModify1Bit.vhd
+set_global_assignment -name LL_ROOT_REGION ON -section_id "Root Region"
+set_global_assignment -name LL_MEMBER_STATE LOCKED -section_id "Root Region"
+set_global_assignment -name STRATIX_DEVICE_IO_STANDARD "3.3-V LVTTL"
+set_location_assignment PIN_125 -to A[15]
+set_location_assignment PIN_129 -to A[14]
+set_location_assignment PIN_131 -to A[13]
+set_location_assignment PIN_133 -to A[12]
+set_location_assignment PIN_137 -to A[11]
+set_location_assignment PIN_139 -to A[10]
+set_location_assignment PIN_141 -to A[9]
+set_location_assignment PIN_143 -to A[8]
+set_location_assignment PIN_127 -to A[7]
+set_location_assignment PIN_130 -to A[6]
+set_location_assignment PIN_132 -to A[5]
+set_location_assignment PIN_134 -to A[4]
+set_location_assignment PIN_138 -to A[3]
+set_location_assignment PIN_140 -to A[2]
+set_location_assignment PIN_142 -to A[1]
+set_location_assignment PIN_144 -to A[0]
+set_location_assignment PIN_18 -to clk
+set_location_assignment PIN_97 -to load
+set_location_assignment PIN_101 -to write_bit
+set_location_assignment PIN_108 -to write_row[2]
+set_location_assignment PIN_106 -to write_row[1]
+set_location_assignment PIN_104 -to write_row[0]
+set_location_assignment PIN_107 -to write_col[2]
+set_location_assignment PIN_105 -to write_col[1]
+set_location_assignment PIN_103 -to write_col[0]
+set_global_assignment -name MISC_FILE "C:/Users/user/Desktop/project/LedMatrixDisplayModify1Bit/LedMatrixDisplayModify1Bit.dpf"
+set_location_assignment PIN_124 -to A[16]
+set_location_assignment PIN_122 -to A[17]
+set_location_assignment PIN_120 -to A[18]
+set_location_assignment PIN_118 -to A[19]
+set_location_assignment PIN_114 -to A[20]
+set_location_assignment PIN_112 -to A[21]
+set_location_assignment PIN_111 -to A[22]
+set_location_assignment PIN_113 -to A[23]
+set_location_assignment PIN_102 -to write_num
+set_location_assignment PIN_8 -to row_2[0]
+set_location_assignment PIN_6 -to row_2[1]
+set_location_assignment PIN_4 -to row_2[2]
+set_location_assignment PIN_2 -to row_2[3]
+set_location_assignment PIN_7 -to row_2[4]
+set_location_assignment PIN_5 -to row_2[5]
+set_location_assignment PIN_3 -to row_2[6]
+set_location_assignment PIN_1 -to row_2[7]

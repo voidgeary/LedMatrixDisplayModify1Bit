@@ -1,0 +1,103 @@
+--Standard includes
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_ARITH.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
+ 
+--Entity definiton
+entity LedMatrixDisplayModify1Bit is
+	Port(	A 			: out STD_LOGIC_VECTOR (23 downto 0); -- maps to pins 0 to 16 of port A
+			clk 		: in STD_LOGIC;
+			
+			write_num	: in std_logic;
+			write_bit	: in STD_LOGIC;
+			load		: in STD_LOGIC;
+			write_col	: in unsigned(2 downto 0);
+			write_row	: in unsigned(2 downto 0)
+	); --clock signal
+end LedMatrixDisplayModify1Bit;
+ 
+--architecture definition
+architecture Behavioral of LedMatrixDisplayModify1Bit is
+ --Interial signals
+ signal counter : STD_LOGIC_VECTOR(8 downto 0) := (others => '0'); --counter to control state and delay
+ signal row : STD_LOGIC_VECTOR(7 downto 0) := "11111110";               --signal for LED rows
+ signal col : STD_LOGIC_VECTOR(7 downto 0) := "00000001";               --signal for LED columns
+ type display_t is array(7 downto 0) of STD_LOGIC_VECTOR(7 downto 0);
+ signal display : display_t := ("00000000" ,    -- A simple image to display
+								"01100110" ,    -- stored in an array
+								"01100110" ,
+								"00000000" ,
+								"00000000" ,
+								"11000011" ,
+								"00111100" ,
+								"00000000");
+ signal display2 : display_t := ("00000000" ,    -- A simple image to display
+								"01100110" ,    -- stored in an array
+								"01100110" ,
+								"00000000" ,
+								"00000000" ,
+								"11000011" ,
+								"00111100" ,
+								"00000000");
+ 
+ signal col_mask 	: STD_LOGIC_VECTOR(7 downto 0) := "00000000";      --mask value used to activate only desired pixels
+ signal col_mask2	: STD_LOGIC_VECTOR(7 downto 0) := "00000000";
+ signal row_count 	: unsigned(2 downto 0) := "001";                      --pointer for array
+ 
+	component input_buffer
+    port(
+        clk     : in std_logic;
+        data_in : in std_logic;
+        load    : in std_logic;
+        counter	: in STD_LOGIC_VECTOR(8 downto 0);
+
+        data_out: out std_logic_vector(7 downto 0);
+        RAM_load: out std_logic
+    );
+    end component;
+ 
+begin
+    --Process Definition
+    count: process(clk)
+   begin
+        -- triggers action on rising edge of clock signal
+     if rising_edge(clk) then
+        --increment counter
+       counter <= counter+1;
+         --clock period is 31.25ns, counter is 9 bits, should scan whole matrix in < 1ms
+            --trigger each time counter rolls over back to zero
+            if counter = 0 then
+                -- Left Rotate col
+                col <= col(6 downto 0) & col(7);
+                -- Trigger when last column becomes active
+                if col = "10000000" then
+                    -- Left rotate row
+                    row <= row(6 downto 0) & row(7);
+                    -- increment row count
+                    row_count <= row_count + 1;
+                    -- get column mask from current position in array
+                    col_mask <= display(conv_integer(row_count));
+                    col_mask2 <= display2(conv_integer(row_count));
+                end if;
+            end if;
+            --copy signals to outputs
+            A(7 downto 0) <= not row;
+            --combine column with mask to only display selected pixels
+            A(15 downto 8) <=not (col AND col_mask);
+            A(23 downto 16) <=not (col AND col_mask2);
+     end if;
+   end process;
+   
+	process(load)
+	begin
+		if rising_edge(load) then
+			if write_num = '0' then
+				display(conv_integer(write_row))(conv_integer(write_col)) <= write_bit;
+			else
+				display2(conv_integer(write_row))(conv_integer(write_col)) <= write_bit;
+			end if;
+		end if;
+	end process;
+ 
+end Behavioral;
